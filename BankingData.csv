@@ -1,8 +1,4 @@
-accNo, name, age,pan,phoneNo,nomineeName,balance
+accNo, name, age,pan,phoneNo,nomineeName,address,balance
 
-314269138,kholi  virat,39,hgkfd67gh,7806944932,basga,1270.0
-111913821,mohamed tharfi,21,hfghj78th,1234567890,hsgf,675.000000
-537162147,th tah,21,hkgpm67qa,7806922932,thad,975.0
-
-223694921,Mohamed Tharif,21,Hkghd67Hj,7805912345,Tharif,1000.000000
-339627493,Jp Shah,24,kmnop67qr,1234567890,tharif,1568.0
+405972080,mohamed tharif,25,hgtyh78uj,9090909090,basha badusha,54/newschool street/cuddalore/tamilnadu/608303,500.000000
+770967737,mo tharif,28,hjhji78uj,9090908989,basha Badusha,67/yu street/cuddalore/Tamil Nadu/608303,900.0

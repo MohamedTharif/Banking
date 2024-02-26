@@ -5,49 +5,54 @@ import java.util.regex.*;
 import BankingSystem.checkExisting;
 import BankingSystem.writeAccount;
 
-public class existingAccount {
+public class existingAccount  {
 
    private double balance;
    private String csvFilePath ;
    private String columnName ;
-   private int index;
    private boolean Value;
-  private long accNo;
+   private long accNo;
 
    static String accNoPattern="^[0-9]{9}$";
   
-
+ //Creating Objects for checkExisting and writeAccount classes
   checkExisting cE =new checkExisting();
   writeAccount wA = new writeAccount();
 
-   public void setBalance(){ balance=cE.returnbalance(); }
-   public void setCsvFilePath(){csvFilePath= "C:/Banking/BankingData.csv";}
-   public void setColumnName(){columnName="accNo";}
+   public void setBalance(){ this.balance=cE.returnbalance(); }
+   public void setCsvFilePath(){this.csvFilePath= "C:/Banking/BankingData.csv";}
+   public void setColumnName(){this.columnName="accNo";}
+   public void setAccNo(String accNo) {this.accNo = Long.parseLong(accNo);}
 
 
    Scanner sc =new Scanner(System.in);
 
- public void getDetails()
+ public void getDetails(String accNoStr) throws Exception
  {
    
-    System.out.println("Enter ACCOUNT NUMBER");
-    String accNoStr=sc.nextLine();
-
-  /* if(!accNoStr.matches(accNoPattern))
+try {
+   
+ //Checking the Entered Account Number is Valid
+  if(!accNoStr.matches(accNoPattern))
    {
 
    System.out.println("Incorrect Account Number,Enter Again the Account Number :");
    accNoStr=sc.nextLine();
 
-   }*/
-       
-   this.accNo = Long.parseLong(accNoStr);
+   }
+   setAccNo(accNoStr);
+   
    System.out.println("Entered Account Number is :"+ accNo);
 
+   //Setting the csvFilePath and columnName as accNo
    setCsvFilePath();
    setColumnName();
+   
+   //It returns true if Account Exist in the Database
    Value=cE.checkAccountExist(csvFilePath,accNo);
-  
+   
+   }catch(Exception e) {
+	   e.printStackTrace();   }
     
 
   }
@@ -55,9 +60,12 @@ public class existingAccount {
 public void deposit() throws Exception
 
   {  
-	if(!Value) {System.out.println("Bot Found");}
+	if(!Value) {
+		System.out.println();
+		}
 	else {
-	setBalance();
+		//getting the balance from the Database
+	  setBalance();
   
       System.out.println("Enter amount to Deposit");
       
@@ -69,24 +77,32 @@ public void deposit() throws Exception
   }
  public void withdraw() throws Exception
  { 
-	 if(!Value) {System.out.println("Bot Found");}
+	 if(!Value) {
+		 System.out.println();
+	 }
 	 
-	 else {	 
-	 
-   setBalance();
+	 else 
+   {	 
+	 //getting the balance from the Database
+      setBalance();
    
-   if(balance>500.00 )
-   {
-    System.out.println("Enter Amount to Withdraw");
-  
-    balance =balance - sc.nextDouble();
+      System.out.println("Enter Amount to Withdraw");
+      double newBalance = sc.nextDouble();
    
-    wA.updateData(accNo,balance);
+     // Minimum of 500 can be Withdrawn 
+   
+       if(balance>newBalance && balance>=500 )
+       {
     
-    } else
-   {
-     System.out.println("Insufficient Amount");
-   } 
+         balance =balance - newBalance; 
+   
+        //Updating the Balance in Database
+         wA.updateData(accNo,balance);
+    
+        } else
+         {
+           System.out.println("Insufficient Amount");
+         } 
 	}
 }
 	 
@@ -94,9 +110,11 @@ public void deposit() throws Exception
 
  public void showBalance()
  {
+	//getting the balance from the Database
     setBalance();
 	
-    if(!Value){
+    if(!Value)
+    {
 
     System.out.println();
 

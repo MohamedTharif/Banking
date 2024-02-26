@@ -1,8 +1,6 @@
 package BankingSystem;
 
 import java.util.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.io.*;
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
@@ -37,7 +35,7 @@ public class writeAccount
     }
 
 
-     public void writeData(long accNo,String name,int age,String pan,String phoneNo,String nomineeName,double balance)
+     public void writeData(long accNo,String name,int age,String pan,String phoneNo,String nomineeName,String address,double balance)
     {
       
        try (BufferedWriter writer=new BufferedWriter(new FileWriter(csvFilePath,true)))
@@ -48,13 +46,13 @@ public class writeAccount
            if(exist==false)
            {
             // Writing header
-            writer.write("accNo, name, age,pan,phoneNo,nomineeName,balance\n");
+            writer.write("accNo, name, age,pan,phoneNo,nomineeName,address,balance\n");
            }
 
             // Writing data
             writer.newLine();
             
-            writer.append(String.format("%s,%s,%d,%s,%s,%s,%f",accNo, name, age, pan, phoneNo, nomineeName,balance));
+            writer.append(String.format("%s,%s,%d,%s,%s,%s,%s,%f",accNo, name, age, pan, phoneNo, nomineeName,address,balance));
 
             System.out.println("Data has been Created.");
          } catch (IOException e) 
@@ -66,21 +64,29 @@ public class writeAccount
 
 
   public void updateData(long targetAccNo,double Balance) throws Exception
-  { 
+ { 
 	   
   System.out.println("Updating Balance for AccNo: " + targetAccNo + ", New Balance: " + Balance);
 
+  //file pointer moves to nextLine while reading,so .tmp files were using to write
   try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
-          BufferedWriter writer = new BufferedWriter(new FileWriter(csvFilePath + ".tmp"))) {
-
+          BufferedWriter writer = new BufferedWriter(new FileWriter(csvFilePath + ".tmp"))) 
+  {
       String line;
-      while ((line = reader.readLine()) != null) {
-          String[] parts = line.split(",");
-          if (parts.length > 0 && parts[0].equals(String.valueOf(targetAccNo))) {
-              // Assuming balance is in the last column
-              parts[parts.length - 1] = Double.toString(Balance);
+      //reading line from the CSV file
+      while ((line = reader.readLine()) != null) 
+      {
+    	  //values in CSV file were stored in String array
+          String[] lines = line.split(",");
+          
+          //more than one column and account number matches in accNo column
+          if (lines.length > 0 && lines[0].equals(String.valueOf(targetAccNo))) {
+              
+        	  // balance is in the last column
+              lines[lines.length - 1] = Double.toString(Balance);
           }
-          writer.write(String.join(",", parts) + System.lineSeparator());
+          //lines were now concatenated and writes in the CSV file 
+          writer.write(String.join(",", lines) + System.lineSeparator());
       }
 
   } catch (IOException e) {
@@ -88,18 +94,21 @@ public class writeAccount
   }
 
   // Rename the temporary file to replace the original
-  try {
+    try 
+    {
       java.nio.file.Files.move(
               java.nio.file.Paths.get(csvFilePath + ".tmp"),
               java.nio.file.Paths.get(csvFilePath),
               java.nio.file.StandardCopyOption.REPLACE_EXISTING
       );
       System.out.println("Amount Has Been Deposited.");
-      System.out.println("Updated Balance for Account Number: " + targetAccNo + ", New Balance: " + Balance);
-  } catch (IOException e) {
-      System.out.println("An error occured While Depositing,Please Proceed Again....!");
-	  e.printStackTrace();
-  }
+      System.out.println("For the Account Number " + targetAccNo + ", New Balance: " + Balance);
+    } 
+    catch (IOException e) 
+     {
+       System.out.println("An error occured While Depositing,Please Proceed Again....!");
+	   e.printStackTrace();
+     }
   }
  
 

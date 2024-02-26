@@ -19,6 +19,7 @@ public class newAccount
  private long accNo;
  private String panNumber;
  private double balance;
+ private String address;
  
 
  private static String noPattern="^[0-9]{10}$";
@@ -94,26 +95,57 @@ public void getPAN()
 
 public void getBalance()
 {
+	
  System.out.println("Enter Intial Amount To Deposit");
  System.out.println("Minimum Of 500 can Be deposited");
  balance=sc.nextDouble();
+ 
  if(balance<500.00)
  { 
   System.out.println("this amount can not be accepted,please Enter above 500/-");
   balance=0.00d;
   balance=sc.nextDouble();
   }
+ 
 }
 
-/*public void getAddress(){
- System.out.println("Enter Address");
- System.out.println("Enter DoorNo :");
- String doorNo=sc.nextInt();
- System.out.println("");
-}*/
+public void getAddress()
+{
+ System.out.println("*******Enter Address*******");
+ System.out.print("Enter DoorNo :");
+ String doorNo=sc.nextLine(); 
  
+ System.out.print("Enter Street Name : ");
+ String streetName=sc.nextLine();
+ 
+ System.out.print("Enter District Name : ");
+ String district=sc.nextLine();
+ 
+ System.out.print("Enter State Name : ");
+ String State=sc.nextLine();
+ 
+ System.out.print("Enter PinCode : ");
+ String pinCode=sc.nextLine(); 
+ 
+ this.address=String.join("/", doorNo,streetName,district,State,pinCode);
+ 
+}
+
+public void getNomineeName() 
+{
+	System.out.println("Nominee Name");
+	System.out.println("Enter First Name of Nominee Name");
+	String f_name=sc.nextLine();
+	
+	System.out.println("Enter Last Name of Nominee Name");
+	String l_name=sc.nextLine();
+	
+	this.nomineeName=String.join(" ", f_name,l_name);
+}
+
   public void getDetails()
  {
+	  
  getName();
 
  getAge();
@@ -122,14 +154,16 @@ public void getBalance()
 
  getPhoneNo();  
  
- System.out.println("Nominee Name");
- this.nomineeName=sc.nextLine();
+ getAddress();
+ 
+ getNomineeName();
  
 //intilizing account no for account
  setaccNo();
 
  getBalance();
-  } 
+  
+ } 
 
 public void show()
  {
@@ -140,8 +174,10 @@ public void show()
   System.out.println("Pan Number : " + panNumber);
   System.out.println("Your Account Number Is :"+accNo);
   System.out.println("Balance is : "+balance);
+  System.out.println("Address is : "+address);
+  
   System.out.println();
-  wA.writeData(accNo, name, age, panNumber, phoneNo, nomineeName,balance);
+  wA.writeData(accNo, name, age, panNumber, phoneNo, nomineeName,address,balance);
  }
 
 

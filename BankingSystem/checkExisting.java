@@ -13,6 +13,7 @@ public class checkExisting
  private String nomineeName;
  private String pan;
  private double balance;
+ private String address;
 
  
    
@@ -41,7 +42,8 @@ public class checkExisting
 	                    pan=columns[3];
 	                    phoneNo=columns[4];
 	                    nomineeName=columns[5];
-                        balance=Double.parseDouble(columns[6]);
+	                    address=columns[6];
+                        balance=Double.parseDouble(columns[7]);
 
                         System.out.println("Name: " + name );
                         found = true;
