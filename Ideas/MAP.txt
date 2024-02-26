@@ -1,0 +1,71 @@
+public class Banking {
+
+    public static void main(String[] args) {
+        BankingSystem bankingSystem = new BankingSystem();
+
+        boolean accountExists = bankingSystem.checkAccountDetails(A, B, C, D, E, F);
+
+        if (accountExists) {
+            ExistingAccount existingAccount = bankingSystem.getExistingAccount();
+            existingAccount.transactions();
+            existingAccount.updateDetails(A, B, C, D, E, F);
+        } else {
+            NewAccount newAccount = new NewAccount();
+            newAccount.setDetails(A, B, C, D, E, F);
+            newAccount.initialAmount();
+            newAccount.writeDetails(A, B, C, D, E, F);
+        }
+    }
+}
+
+class BankingSystem {
+
+    public boolean checkAccountDetails(A, B, C, D, E, F) {
+        // Implementation of checking logic
+        // Return true if account exists, false otherwise
+    }
+
+    public int getIndex() {
+        // Implementation of getting index logic
+        return index;
+    }
+
+    public ExistingAccount getExistingAccount() {
+        // Implementation of getting existing account logic
+        return existingAccount;
+    }
+}
+
+class NewAccount {
+
+    public void setDetails(A, B, C, D, E, F) {
+        // Implementation of setting account details logic
+    }
+
+    public void initialAmount() {
+        // Implementation of setting initial amount logic
+    }
+
+    public void writeDetails(A, B, C, D, E, F) {
+        // Implementation of writing account details logic
+    }
+}
+
+class ExistingAccount {
+
+    public void transactions() {
+        // Implementation of transactions logic
+    }
+
+    public void deposit(amount) {
+        // Implementation of deposit logic
+    }
+
+    public void withdraw(amount) {
+        // Implementation of withdraw logic
+    }
+
+    public void updateDetails(A, B, C, D, E, F) {
+        // Implementation of updating details logic
+    }
+}

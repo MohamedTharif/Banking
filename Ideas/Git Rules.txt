@@ -1,0 +1,44 @@
+Starting a Java project and using Git for version control is a good practice. Here's a step-by-step guide on how to initialize a Git repository for your Java project and how to commit your changes after each step:
+
+1. **Initialize a Git repository:**
+   Open your terminal or command prompt, navigate to your project folder, and run the following command to initialize a Git repository:
+   ```
+   git init
+   ```
+
+2. **Create your Java files:**
+   Create your Java files within your project folder. For example, you might have files like `Main.java`, `Utils.java`, etc.
+
+3. **Add your files to the staging area:**
+   Before you commit your changes, you need to add your files to the staging area. Run the following command:
+   ```
+   git add .
+   ```
+   This command adds all the files in your project folder to the staging area. You can also specify individual files if you don't want to add all files at once.
+
+4. **Commit your changes:**
+   After adding your files to the staging area, you can commit your changes. Committing essentially saves a snapshot of your project at that point in time. Run the following command:
+   ```
+   git commit -m "Initial commit"
+   ```
+   Replace `"Initial commit"` with a meaningful commit message describing the changes you made in this commit.
+
+5. **Repeat steps 2-4 for each significant change:**
+   Whenever you make significant changes to your project (adding new files, modifying existing ones, etc.), repeat steps 2-4.
+
+6. **View the project history:**
+   You can view the history of your commits using the following command:
+   ```
+   git log
+   ```
+   This command shows you a list of commits, including their commit messages, commit IDs, and other relevant information.
+
+7. **Push your changes to a remote repository (optional):**
+   If you want to collaborate with others or back up your project on a remote server (like GitHub, GitLab, Bitbucket, etc.), you can push your changes to a remote repository. First, you'll need to create a repository on one of these platforms. Then, you can push your changes using the following command:
+   ```
+   git remote add origin <remote_repository_url>
+   git push -u origin master
+   ```
+   Replace `<remote_repository_url>` with the URL of your remote repository.
+
+By following these steps, you'll be able to effectively use Git for version control in your Java project. If you have any questions or encounter any issues along the way, feel free to ask!

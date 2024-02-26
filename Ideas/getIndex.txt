@@ -1,0 +1,50 @@
+  public int getIndex(String csvFilePath, String columnName,String accNo)
+  {
+            try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            String line;
+            int rowIndex = 0;
+            int columnIndex = -1;
+
+            // Read headers to find the column index
+
+            if ((line = reader.readLine()) != null)
+         {
+                String[] headers = line.split(",");
+                for (int i = 0; i < headers.length; i++)
+              {
+                    if (columnName.equals(headers[i]))
+                    {
+                        columnIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            if (columnIndex == -1)
+          {
+                System.out.println("Column '" + columnName + "' not found in the CSV file.");
+                return -1;
+            }
+
+            // Search for the target value in the specified column
+            while ((line = reader.readLine()) != null)
+          {
+                String[] row = line.split(",");
+
+                if (row.length > columnIndex && accNo.equals(row[columnIndex]))
+                 {
+	   // Index found
+                    return rowIndex; 
+                 }
+
+                rowIndex++;
+               }
+
+            System.out.println("Account Number '" + accNo + "' not found in Database'" + columnName + "',Enter Your Number Correctly");
+	System.out.println("Thank You");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return -1; // Return -1 if not found or an error occurred
+    }
