@@ -1,4 +1,4 @@
-package BankingSystem;
+ package BankingSystem;
 
 import java.util.Scanner;
 import java.util.regex.*;
@@ -13,6 +13,7 @@ public class existingAccount  {
    private boolean Value;
    private long accNo;
 
+
    static String accNoPattern="^[0-9]{9}$";
   
  //Creating Objects for checkExisting and writeAccount classes
@@ -23,6 +24,7 @@ public class existingAccount  {
    public void setCsvFilePath(){this.csvFilePath= "C:/Banking/BankingData.csv";}
    public void setColumnName(){this.columnName="accNo";}
    public void setAccNo(String accNo) {this.accNo = Long.parseLong(accNo);}
+   
 
 
    Scanner sc =new Scanner(System.in);
@@ -40,6 +42,7 @@ try {
    accNoStr=sc.nextLine();
 
    }
+  //creating account Number
    setAccNo(accNoStr);
    
    System.out.println("Entered Account Number is :"+ accNo);
