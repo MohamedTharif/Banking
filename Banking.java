@@ -10,19 +10,19 @@ public class Banking{
  {
    Scanner sc=new Scanner(System.in);
  
-  
+  //creating objects of NewAccount class and existingAccount Class
    newAccount nA=new newAccount();
-    existingAccount eA=new  existingAccount();
-	//checkExisting cE=new checkExisting();	
-  
-  
-  int choice;
+   existingAccount eA=new  existingAccount();
+	 
+   int choice;
+
   do {
+  //Menu
    System.out.println("WELCOME TO OUR BANK ");
    System.out.println("***********************************");
 
-    System.out.println("\n1.CREATE NEW ACCOUNT\n2.BALANCE\n3.Deposit\n4.Withdraw\n5.Exit");
-    System.out.println("Enter Option");
+    System.out.println("\n1.CREATE NEW ACCOUNT\n2.BALANCE\n3.DEPOSIT\n4.WITHDRAW\n5.EXIT");
+    System.out.println("ENTER YOUR CHOICE");
     choice= Integer.parseInt(sc.nextLine());
     String accNo;
     switch(choice)
@@ -33,28 +33,28 @@ public class Banking{
 			break;
 			
 		case 2:
-			System.out.println("Enter Account Number");
+			System.out.println("ENTER ACCOUNT NUMBER");
 			accNo=sc.nextLine();
 			eA.getDetails(accNo);
 			eA.showBalance();
 			break;
 			
 		case 3:
-			System.out.println("Enter Account Number");
+			System.out.println("ENTER ACCOUNT NUMBER");
 			accNo=sc.nextLine();
 			eA.getDetails(accNo);
 			eA.deposit();
 			break;
 			
 		case 4:
-			System.out.println("Enter Account Number");
+			System.out.println("ENTER ACCOUNT NUMBER");
 			accNo=sc.nextLine();
 			eA.getDetails(accNo);
 			eA.withdraw();
 			break;
      
 		case 5:
-			System.out.println("Thank You....!");
+			System.out.println("THANK YOU FOR YOUR VISIT....!");
 			break;
       }
    

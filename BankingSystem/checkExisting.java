@@ -23,9 +23,12 @@ public class checkExisting
    
      try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) 
   {
-            String line;
+           String line;
            String targetAccNo=Long.toString(accNo);
-             found = false;
+
+           //found is returned true if account has existed else false
+            found = false;
+
             while ((line = reader.readLine()) != null) 
          {
                // Split the line by comma to get individual values
@@ -36,19 +39,19 @@ public class checkExisting
                     // If accNo matches, extract name and age
                     if (columns.length > -1) 
 	                 {
-                        name = columns[1];
-                        String ageNo = columns[2];
+                                      name = columns[1];
+                                      String ageNo = columns[2];
 	                    age = Integer.parseInt(ageNo);
 	                    pan=columns[3];
 	                    phoneNo=columns[4];
 	                    nomineeName=columns[5];
 	                    address=columns[6];
-                        balance=Double.parseDouble(columns[7]);
+                                      balance=Double.parseDouble(columns[7]);
 
-                        System.out.println("Name: " + name );
-                        found = true;
-                        break; // No need to continue searching if found
-                    }
+                                     System.out.println("Name: " + name );
+                                     found = true;
+                                     break; // No need to continue searching if found
+                                 }
                 }
             }
             if (!found) 
@@ -64,14 +67,13 @@ public class checkExisting
  {
 	 return  name; 
  }
- public double returnbalance() 
-  { 
-	 
+
+//used to return balance from the file
+    public double returnbalance() 
+    {  
 	 return balance; 
-	 }
-//public int returnAge(){return age;}
-//public String returnPhoneNo
- 
+     }
+
 
 
 

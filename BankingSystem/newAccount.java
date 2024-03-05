@@ -21,15 +21,20 @@ public class newAccount
  private double balance;
  private String address;
  
-
+ //constraints for age,phoneNo,PAN
  private static String noPattern="^[0-9]{10}$";
  private static String agePattern="^(?:[5-9]|[1-5][0-9]|6[0-4])$";
  private static String panPattern="(?i)^[A-Za-z]{5}[1-9]{2}[A-Za-z]{2}$" ;
  
  Random random =new Random();
-  long upperBound = 1000000000;
-  long lowerBound= 0000000001;
-  public void setaccNo() { this.accNo =random.nextLong(upperBound - lowerBound + 1) + lowerBound ;}
+
+  public void setaccNo()
+ { 
+ //setting limit for a account Number
+   long upperBound = 1000000000;
+   long lowerBound= 1; 
+   this.accNo =random.nextLong(upperBound - lowerBound + 1) + lowerBound ;
+   }
   public void setName() { this.name =firstName+" "+lastName ; }
 
   Scanner sc =new Scanner(System.in);
@@ -69,6 +74,7 @@ public class newAccount
       this.age=Integer.parseInt(ageNo);
 }
  
+// getting phoneNo and Ensure it was in Correct Format
  public void getPhoneNo()
 {
   do{
@@ -81,6 +87,7 @@ public class newAccount
   }while(!phoneNo.matches(noPattern));
   
 }
+// getting PAN number and and it was Valid by Matching the Pattern(5 Letters 2 Numbers 2 Letters)
 public void getPAN()
 {
    do{
@@ -93,6 +100,46 @@ public void getPAN()
    }while(!Pattern.matches(panPattern, panNumber)); 
 }
 
+//getting address from user
+public void getAddress()
+{
+ System.out.println("*******Enter Address*******");
+ System.out.print("Enter DoorNo :");
+ String doorNo=sc.nextLine(); 
+ 
+ System.out.print("Enter Street Name : ");
+ String streetName=sc.nextLine();
+ 
+ System.out.println("Enter Taluk Name");
+ String taluk=sc.nextLine(); 
+
+ System.out.print("Enter District Name : ");
+ String district=sc.nextLine();
+ 
+ System.out.print("Enter State Name : ");
+ String State=sc.nextLine();
+ 
+ System.out.print("Enter PinCode : ");
+ String pinCode=sc.nextLine(); 
+ 
+ this.address=String.join("/", doorNo,streetName,taluk,district,State,pinCode);
+ 
+}
+//prompting user to enter Nominee Name
+public void getNomineeName() 
+{
+	System.out.println("*************Nominee Name*************");
+	System.out.println("Enter First Name of Nominee Name");
+	String f_name=sc.nextLine();
+	
+	System.out.println("Enter Last Name of Nominee Name");
+	String l_name=sc.nextLine();
+	 
+//assigning the Nominee Name by combining first name and last Name
+	this.nomineeName=String.join(" ", f_name,l_name);
+}
+
+//getting the balance from the CSV file
 public void getBalance()
 {
 	
@@ -107,40 +154,6 @@ public void getBalance()
   balance=sc.nextDouble();
   }
  
-}
-
-public void getAddress()
-{
- System.out.println("*******Enter Address*******");
- System.out.print("Enter DoorNo :");
- String doorNo=sc.nextLine(); 
- 
- System.out.print("Enter Street Name : ");
- String streetName=sc.nextLine();
- 
- System.out.print("Enter District Name : ");
- String district=sc.nextLine();
- 
- System.out.print("Enter State Name : ");
- String State=sc.nextLine();
- 
- System.out.print("Enter PinCode : ");
- String pinCode=sc.nextLine(); 
- 
- this.address=String.join("/", doorNo,streetName,district,State,pinCode);
- 
-}
-
-public void getNomineeName() 
-{
-	System.out.println("Nominee Name");
-	System.out.println("Enter First Name of Nominee Name");
-	String f_name=sc.nextLine();
-	
-	System.out.println("Enter Last Name of Nominee Name");
-	String l_name=sc.nextLine();
-	
-	this.nomineeName=String.join(" ", f_name,l_name);
 }
 
   public void getDetails()
@@ -168,13 +181,17 @@ public void getNomineeName()
 public void show()
  {
   
-  System.out.println("Account Created");
+  System.out.println("************Account Created************");
+  System.out.println("Welcome to Our Bank,Pleasure to Have you As Our Delightfull Customer");
+  System.out.println("Account Details : ")
   System.out.println("Name : "+ name);
   System.out.println("Nominee Name : "+ nomineeName);
+  System.out.println("Address is : "+address);
   System.out.println("Pan Number : " + panNumber);
+  System.out.println("");
   System.out.println("Your Account Number Is :"+accNo);
   System.out.println("Balance is : "+balance);
-  System.out.println("Address is : "+address);
+  
   
   System.out.println();
   wA.writeData(accNo, name, age, panNumber, phoneNo, nomineeName,address,balance);

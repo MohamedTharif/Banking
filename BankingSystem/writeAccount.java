@@ -7,12 +7,19 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.Math;
+import java.util.regex.*;
 
 
 public class writeAccount
 { 
+  private long transactionID;
   
   private String csvFilePath ="C:/Banking/BankingData.csv";
+  
+  Random random =new Random();
+
+  public void setTransactionID(){this.transactionID= random.nextLong(1999999990);}
  
   public boolean readData()
   {
@@ -54,7 +61,7 @@ public class writeAccount
             
             writer.append(String.format("%s,%s,%d,%s,%s,%s,%s,%f",accNo, name, age, pan, phoneNo, nomineeName,address,balance));
 
-            System.out.println("Data has been Created.");
+            System.out.println("Account has been Created.");
          } catch (IOException e) 
            {
             System.out.println("An error Occured.");
@@ -101,8 +108,10 @@ public class writeAccount
               java.nio.file.Paths.get(csvFilePath),
               java.nio.file.StandardCopyOption.REPLACE_EXISTING
       );
+      setTransactionID();
       System.out.println("Amount Has Been Deposited.");
       System.out.println("For the Account Number " + targetAccNo + ", New Balance: " + Balance);
+      System.out.println("Transaction ID : "+transactionID );
     } 
     catch (IOException e) 
      {
